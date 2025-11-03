@@ -17,7 +17,7 @@ function App() {
   const [choiceOne, setChoiceOne] = useState(null)
   const [choiceTwo, setChoiceTwo] = useState(null)
   const [disabled, setDisabled] = useState(false)
-
+  const [time, setTime] = useState(30)
 
   // shuffle cards
   const shuffleCards = () => {
@@ -66,10 +66,27 @@ function App() {
     shuffleCards()
   }, [])
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setTime(prev => {
+        if(prev <= 0){
+          clearInterval(intervalId)
+          return prev
+        }
+        return prev - 1
+      })
+    }, 1000)
+    return () => clearInterval(intervalId)
+  }, [])
+
   return (
     <div className="App">
       <h1>Memory Game</h1>
-      <button onClick={shuffleCards}>New Game</button>
+      <div className='div'>
+        <button onClick={shuffleCards}>New Game</button>
+        <span>Time:{time}</span>
+      </div>
+
 
       <div className='card-grid'>
         {cards.map(card => (

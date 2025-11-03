@@ -22,3 +22,9 @@ button:hover {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 20px;
 }
+
+.div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
